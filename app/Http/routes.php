@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => ['web']], function () {
-  Route::get('/admin', ['middleware' => 'auth', function () {
-     return view('dashboard');
-}]);
+Route::group(['middleware' => ['auth']], function () {
+        Route::get('admin', 'adminController@index');
+
+        Route::resource('admin/page', 'pageController');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
