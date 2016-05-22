@@ -8,7 +8,7 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    This is your Dashboard.
+                    This is page to edit.
                 </div>
             </div>
         </div>

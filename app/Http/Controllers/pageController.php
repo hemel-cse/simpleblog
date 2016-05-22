@@ -15,7 +15,7 @@ class pageController extends Controller
      */
     public function index()
     {
-        return 'works';
+        return view('admin.pages.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class pageController extends Controller
      */
     public function create()
     {
-        //
+        return 'works';
     }
 
     /**
@@ -47,7 +47,7 @@ class pageController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'works';
     }
 
     /**
@@ -58,7 +58,7 @@ class pageController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 'works';
     }
 
     /**

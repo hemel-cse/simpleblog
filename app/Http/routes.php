@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth']], function () {
+
         Route::get('admin', 'adminController@index');
 
         Route::resource('admin/page', 'pageController');
