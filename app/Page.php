@@ -8,8 +8,14 @@ class Page extends Model
 {
    protected $fillable = [
       'title',
-      'image_url',
-      'description',
-      'timestamp'
+      'slug',
+      'body',
+      'published_at'
    ];
+
+   public function user()
+     {
+         return $this->belongsTo('App\User');
+     }
+
 }
