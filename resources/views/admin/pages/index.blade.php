@@ -2,16 +2,30 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+  <p><h1> Pages </h1> <span class="pull-right"> <a href="{{ action('pageController@create') }}">Add New Page</a> </span> </p>
 
-                <div class="panel-body">
-                    This is page to edit.
-                </div>
-            </div>
-        </div>
-    </div>
+  <hr/>
+  <br/>
+  @foreach ($pages as $page)
+        <page>
+        <ul class="list-group">
+        <li class="list-group-item">
+          <a href="{{ action('pageController@show', [$page->id]) }}"> {{$page->title}} </a>
+          @if(Auth::check())
+          <span class="pull-right">
+          <a href="{{ action('pageController@edit', [$page->id]) }}"> Edit</a>
+            <span>
+             <a href="{{ action('pageController@destroy', [$page->id]) }}"> Delete</a>
+            </span>
+          </span>
+          @endif
+         </li>
+        </ul>
+        </page>
+
+
+  @endforeach
+
 </div>
+
 @endsection

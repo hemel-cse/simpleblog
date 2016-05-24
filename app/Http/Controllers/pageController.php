@@ -3,51 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Page;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PageRequest;
+use Carbon\Carbon;
+use Auth;
 use App\Http\Requests;
 
 class pageController extends Controller
 {
+
+  public function __construct()
+  {
+     $this->middleware('auth',  ['except' => ['show']]);
+  }
+
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the pages.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('admin.pages.index');
+        $pages = Page::latest('published_at')->published()->get();
+        return view('admin.pages.index', compact('pages'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new page.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return 'works';
+        return view('admin.pages.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created page in database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $page = new Page($request->all());
+        $page->slug = str_slug("$page->title", "-");
+        Auth::user()->page()->save($page);
+        return redirect('admin.pages');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified page.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return 'works';
+       $pages = Page::findOrFail($id);
+       return view('page', compact('pages'));
     }
 
     /**
@@ -58,7 +74,8 @@ class pageController extends Controller
      */
     public function edit($id)
     {
-        return 'works';
+        $page = Page::findOrFail($id);
+        return view('admin.pages.edit', compact('page'));
     }
 
     /**
@@ -68,9 +85,11 @@ class pageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PageRequest $request, $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $page->update($request->all());
+        return redirect('admin.pages.index');
     }
 
     /**
@@ -81,6 +100,7 @@ class pageController extends Controller
      */
     public function destroy($id)
     {
-        //
+         dd($id);
+          return redirect('admin.pages.index');
     }
 }

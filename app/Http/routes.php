@@ -19,9 +19,13 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('admin', 'adminController@index');
 
-        Route::resource('admin/page', 'pageController');
+
 });
+
+
+Route::resource('admin/page', 'pageController',['except' => ['show']]);
 
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/{slug}', 'pageController@show');
