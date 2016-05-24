@@ -49,9 +49,10 @@ class pageController extends Controller
     public function store(PageRequest $request)
     {
         $page = new Page($request->all());
+
         $page->slug = str_slug("$page->title", "-");
         Auth::user()->page()->save($page);
-        return redirect('admin.pages');
+        return redirect('/admin/page');
     }
 
     /**
@@ -62,8 +63,8 @@ class pageController extends Controller
      */
     public function show($id)
     {
-       $pages = Page::findOrFail($id);
-       return view('page', compact('pages'));
+       $page = Page::findOrFail($id);
+       return view('page', compact('page'));
     }
 
     /**
@@ -81,7 +82,7 @@ class pageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PageRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -89,7 +90,7 @@ class pageController extends Controller
     {
         $page = Page::findOrFail($id);
         $page->update($request->all());
-        return redirect('admin.pages.index');
+        return redirect('/admin/page');
     }
 
     /**
@@ -100,7 +101,6 @@ class pageController extends Controller
      */
     public function destroy($id)
     {
-         dd($id);
-          return redirect('admin.pages.index');
+          return redirect()->route('admin.pages.index');
     }
 }
