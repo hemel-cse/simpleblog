@@ -24,7 +24,7 @@ class PageRequest extends Request
     public function rules()
     {
       return [
-          'title' => 'required|min:5',
+          'title' => 'required|min:3',
           'body' => 'required',
           'published_at' => 'required|date'
       ];

@@ -9,7 +9,7 @@
 
 <div class="container">
 
-  {!! Form::model($page, ['method' => 'PATCH', 'action' => ['pageController@update', $page->id]]) !!}
+  {!! Form::model($page, ['method' => 'PATCH', 'action' => ['pageController@update', $page->slug]]) !!}
 
       @include ('admin.pages.form', ['submitButtonText' => 'Update Page'])
 

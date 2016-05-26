@@ -16,7 +16,7 @@ class CreateNewPage extends Migration
                     $table->increments('id');
                     $table->integer('user_id')->unsigned();
                     $table->string('title');
-                    $table->string('slug');
+                    $table->string('slug')->unique();
                     $table->text('body');
                     $table->timestamps();
                     $table->timestamp('published_at');

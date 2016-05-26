@@ -9,9 +9,12 @@ use App\Http\Requests\PageRequest;
 use Carbon\Carbon;
 use Auth;
 use App\Http\Requests;
+use DB;
 
 class pageController extends Controller
 {
+
+  //  Constructing auth view
 
   public function __construct()
   {
@@ -27,6 +30,7 @@ class pageController extends Controller
     public function index()
     {
         $pages = Page::latest('published_at')->published()->get();
+
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -51,7 +55,9 @@ class pageController extends Controller
         $page = new Page($request->all());
 
         $page->slug = str_slug("$page->title", "-");
+
         Auth::user()->page()->save($page);
+
         return redirect('/admin/page');
     }
 
@@ -63,7 +69,10 @@ class pageController extends Controller
      */
     public function show($id)
     {
-       $page = Page::findOrFail($id);
+      //  $page = Page::findOrFail($id);
+       $page = DB::table('pages')
+                          ->where('slug',$id)
+                          ->first();
        return view('page', compact('page'));
     }
 
@@ -75,7 +84,10 @@ class pageController extends Controller
      */
     public function edit($id)
     {
-        $page = Page::findOrFail($id);
+        $query = DB::table('pages')
+                           ->where('slug',$id)
+                           ->first();
+        $page = Page::findOrFail($query->id);
         return view('admin.pages.edit', compact('page'));
     }
 
@@ -88,7 +100,10 @@ class pageController extends Controller
      */
     public function update(PageRequest $request, $id)
     {
-        $page = Page::findOrFail($id);
+        $query = DB::table('pages')
+                           ->where('slug',$id)
+                           ->first();
+        $page = Page::findOrFail($query->id);
         $page->update($request->all());
         return redirect('/admin/page');
     }
@@ -101,6 +116,10 @@ class pageController extends Controller
      */
     public function destroy($id)
     {
-          return redirect()->route('admin.pages.index');
+         // $page = Page::findOrFail($id);
+         $page = DB::table('pages')
+                            ->where('slug',$id)
+                            ->delete();
+          return redirect('/admin/page');
     }
 }

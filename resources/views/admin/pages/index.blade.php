@@ -9,15 +9,17 @@
   @foreach ($pages as $page)
         <page>
         <ul class="list-group">
-        <li class="list-group-item">
-          <a href="{{ action('pageController@show', [$page->id]) }} "> {{$page->title}} </a>
+        <li class="list-group-item well">
+          <a href="{{ action('pageController@show', [$page->slug]) }} "> {{$page->title}} </a>
           @if(Auth::check())
           <span class="pull-right">
-          <span class="btn">
-          <a href="{{ action('pageController@edit', [$page->id]) }}"> Edit</a>
+          <span class="btn btn-default">
+          <a href="{{ action('pageController@edit', [$page->slug]) }}"> Edit</a>
           </span>
-            <span class="btn">
-             <a href="{{ action('pageController@destroy', [$page->id]) }}"> Delete</a>
+          <span class="btn">
+             {{ Form::open(['method' => 'DELETE', 'action' => ['pageController@destroy', $page->slug]]) }}
+                 {{ Form::submit('Delete', ['class' => 'btn-danger']) }}
+               {{ Form::close() }}
           </span>
         </span>
           @endif

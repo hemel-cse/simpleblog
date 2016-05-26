@@ -27,5 +27,4 @@ Route::resource('admin/page', 'pageController',['except' => ['show']]);
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
 Route::get('/{slug}', 'pageController@show');
