@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Page;
 use Illuminate\Support\ServiceProvider;
 
 class NavViewServiceProvider extends ServiceProvider
@@ -13,7 +14,10 @@ class NavViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.partials.nav', function($view)
+        {
+           $view->with('pages', Page::latest('published_at')->published()->get());
+        });
     }
 
     /**

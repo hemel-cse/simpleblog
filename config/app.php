@@ -1,4 +1,5 @@
 <?php
+use App\Providers\NavViewServiceProvider;
 
 return [
 
@@ -157,6 +158,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Matriphe\Imageupload\ImageuploadServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\NavViewServiceProvider::class,
 
     ],
 
