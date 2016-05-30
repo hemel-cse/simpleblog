@@ -87,6 +87,7 @@ class pageController extends Controller
         $query = DB::table('pages')
                            ->where('slug',$id)
                            ->first();
+        // dd($query);
         $page = Page::findOrFail($query->id);
         return view('admin.pages.edit', compact('page'));
     }

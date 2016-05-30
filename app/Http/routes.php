@@ -15,6 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/sendmail', function()
+{
+  $data = array(
+       'name' => "Hemel",
+   );
+
+  Mail::send('layouts.mails.welcome', $data, function($message)
+  {
+     $message->from('hemel.bubt@gmail.com', 'Hemel');
+     $message->to('Wrign1989@einrot.com')->subject('welcome to demo project!');
+  });
+
+});
+
 Route::group(['middleware' => ['auth']], function () {
 
         Route::get('admin', 'adminController@index');

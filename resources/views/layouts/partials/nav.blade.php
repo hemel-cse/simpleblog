@@ -24,18 +24,18 @@
                 <ul class="dropdown-menu">
                   @foreach ($pages as $page)
                   <li>{!! link_to_action('pageController@show', $page->title, [$page->slug]) !!}</li>
-                  <li role="separator" class="divider"></li>
+                  <!-- <li role="separator" class="divider"></li> -->
                   @endforeach
                 </ul>
               </li>
             </ul>
             <!-- search form -->
-            <form class="navbar-form navbar-left" role="search">
+            <!-- <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
               <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+            </form> -->
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

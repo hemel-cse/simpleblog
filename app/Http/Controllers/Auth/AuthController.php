@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -63,6 +65,13 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+
+      //  $regmail = $data['email'];
+      // \Mail::send('layouts.mails.welcome', $data, function($message)
+      // {
+      //    $message->from('hemel.bubt@gmail.com', 'Hemel');
+      //    $message->to($regmail)->subject('welcome to demo project!');
+      // });
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

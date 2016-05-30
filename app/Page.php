@@ -17,7 +17,6 @@ class Page extends Model
    protected $dates = ['published_at'];
 
 
-
        public function scopePublished($query)
        {
          $query->where('published_at', '<=', carbon::now());
@@ -30,7 +29,6 @@ class Page extends Model
        }
 
 
-
        public function setPublishedAtAttribute($date)
        {
          $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
@@ -40,6 +38,7 @@ class Page extends Model
        {
            return Carbon::parse($date)->format('Y-m-d');
        }
+
 
    public function user()
      {
